@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Fatal Frame II Remake – 60fps Cheat (PS5)</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <main>
+        <h1>Fatal Frame II: Crimson Butterfly REMAKE<br>60fps cheat for PS5</h1>
+        <p class="sub">Unlocks 60fps on a jailbroken PS5, where the game is normally locked to 30. Tested on a base PS5.
+        </p>
+
+        <div class="card">
+            <img src="./cover.jpg" alt="Fatal Frame II: Crimson Butterfly REMAKE cover art">
+            <dl class="meta">
+                <dt>Title ID</dt>
+                <dd>PPSA32802</dd>
+                <dt>Game version</dt>
+                <dd>01.003.004 only</dd>
+                <dt>File</dt>
+                <dd>PPSA32802_01.003.004.json</dd>
+            </dl>
+            <div class="btns">
+                <a class="btn primary" id="dl" href="./PPSA32802_01.003.004.json" target="_blank"
+                    rel="noopener">Download cheat file</a>
+                <button id="copy">Copy contents</button>
+            </div>
+            <p id="status" role="status"></p>
+        </div>
+
+        <div class="card">
+            <h2>How to use</h2>
+            <ol>
+                <li>Make sure your game is on version <code>01.003.004</code>.</li>
+                <li>Put the file in <code>/data/OnionHEN/cheats/</code> on your jailbroken PS5.</li>
+                <li>Launch the game and enable <b>60fps (experimental)</b> from your cheat menu.</li>
+                <li>To go back to 30fps, untick it.</li>
+            </ol>
+        </div>
+
+        <div class="card warn">
+            <h2>Heads up</h2>
+            <ul>
+                <li>Version-locked. A game update moves the offsets, and the wrong version can crash the game.</li>
+                <li>Tested in gameplay only. Cutscenes were made for 30fps, so check them and the Camera Obscura for odd
+                    timing.
+                </li>
+                <li>For jailbroken consoles and your own copy of the game.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2>See it in action</h2>
+            <p class="sub" style="margin:0 0 14px">Fatal Frame 2 Remake 60 FPS patch test on Base PS5</p>
+            <div
+                style="position:relative;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--code-bg);margin-bottom:12px">
+                <iframe src="https://www.youtube.com/embed/fssmTIzKYco" referrerpolicy="strict-origin-when-cross-origin"
+                    title="Fatal Frame 2 Remake 60 FPS patch test on Base PS5"
+                    style="position:absolute;inset:0;width:100%;height:100%;border:0"
+                    allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen
+                    loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>File contents</h2>
+            <div class="scroll">
+                <pre id="src"></pre>
+            </div>
+        </div>
+
+        <footer>Community patch, not affiliated with Koei Tecmo. Use at your own risk.</footer>
+    </main>
+
+    <script>
+        const FILENAME = "PPSA32802_01.003.004.json";
+        const CHEAT = {
+            name: "Fatal Frame II: Crimson Butterfly REMAKE",
+            id: "PPSA32802",
+            version: "01.003.004",
+            process: "eboot.bin",
+            mods: [{
+                name: "60fps (experimental)",
+                type: "checkbox",
+                hint: "60fps - untested, v01.003.004 only",
+                memory: [
+                    { offset: "088A24E0", on: "3C000000", off: "1E000000" },
+                    { offset: "088A24E4", on: "3C000000", off: "1E000000" },
+                    { offset: "088A24E8", on: "3C000000", off: "1E000000" },
+                    { offset: "088A24EC", on: "3C000000", off: "1E000000" },
+                    { offset: "088A24F0", on: "8988883C", off: "8988083D" },
+                    { offset: "088A24F4", on: "8988883C", off: "8988083D" }
+                ]
+            }],
+            credits: ["NikoruDev"]
+        };
+        const TEXT = JSON.stringify(CHEAT, null, 2) + "\n";
+        const $ = id => document.getElementById(id);
+        const say = m => { $("status").textContent = m; };
+        $("src").textContent = TEXT;
+
+
+        $("copy").addEventListener("click", async () => {
+            try { await navigator.clipboard.writeText(TEXT); say("Copied. Paste it into a file named " + FILENAME); }
+            catch (e) {
+                const r = document.createRange(); r.selectNodeContents($("src"));
+                const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+                say("Selected the text below. Copy it manually.");
+            }
+        });
+    </script>
+</body>
+
+</html>
