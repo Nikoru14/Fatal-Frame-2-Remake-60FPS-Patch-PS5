@@ -1,0 +1,1 @@
+# Fatal-Frame-2-Remake-60FPS-Patch-PS5
