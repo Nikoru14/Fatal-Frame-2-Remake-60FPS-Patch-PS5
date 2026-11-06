@@ -1,0 +1,48 @@
+{
+  "name": "Fatal Frame II: Crimson Butterfly REMAKE",
+  "id": "PPSA32802",
+  "version": "01.002.002",
+  "process": "eboot.bin",
+  "mods": [
+    {
+      "name": "60fps (experimental)",
+      "type": "checkbox",
+      "hint": "60fps - untested, ported to v01.002.002",
+      "memory": [
+        {
+          "offset": "0889E450",
+          "on": "3C000000",
+          "off": "1E000000"
+        },
+        {
+          "offset": "0889E454",
+          "on": "3C000000",
+          "off": "1E000000"
+        },
+        {
+          "offset": "0889E458",
+          "on": "3C000000",
+          "off": "1E000000"
+        },
+        {
+          "offset": "0889E45C",
+          "on": "3C000000",
+          "off": "1E000000"
+        },
+        {
+          "offset": "0889E460",
+          "on": "8988883C",
+          "off": "8988083D"
+        },
+        {
+          "offset": "0889E464",
+          "on": "8988883C",
+          "off": "8988083D"
+        }
+      ]
+    }
+  ],
+  "credits": [
+    "NikoruDev, ported by Nisa."
+  ]
+}

@@ -11,31 +11,34 @@
 <body>
     <main>
         <h1>Fatal Frame II: Crimson Butterfly REMAKE<br>60fps cheat for PS5</h1>
-        <p class="sub">Unlocks 60fps on a jailbroken PS5, where the game is normally locked to 30. Tested on a base PS5.
-        </p>
+        <p class="sub">Unlocks 60fps on a jailbroken PS5, where the game is normally locked to 30.</p>
 
         <div class="card">
             <img src="./cover.jpg" alt="Fatal Frame II: Crimson Butterfly REMAKE cover art">
+            <div class="picker">
+                <label for="ver">Game version</label>
+                <select id="ver"></select>
+            </div>
             <dl class="meta">
                 <dt>Title ID</dt>
                 <dd>PPSA32802</dd>
                 <dt>Game version</dt>
-                <dd>01.003.004 only</dd>
+                <dd><span id="gver"></span> only</dd>
                 <dt>File</dt>
-                <dd>PPSA32802_01.003.004.json</dd>
+                <dd id="fname"></dd>
             </dl>
             <div class="btns">
-                <a class="btn primary" id="dl" href="./PPSA32802_01.003.004.json" target="_blank"
-                    rel="noopener">Download cheat file</a>
+                <a class="btn primary" id="dl" href="#">Download cheat file</a>
                 <button id="copy">Copy contents</button>
             </div>
+            <p id="note"></p>
             <p id="status" role="status"></p>
         </div>
 
         <div class="card">
             <h2>How to use</h2>
             <ol>
-                <li>Make sure your game is on version <code>01.003.004</code>.</li>
+                <li>Make sure your game is on version <code id="howver"></code>.</li>
                 <li>Put the file in <code>/data/OnionHEN/cheats/</code> on your jailbroken PS5.</li>
                 <li>Launch the game and enable <b>60fps (experimental)</b> from your cheat menu.</li>
                 <li>To go back to 30fps, untick it.</li>
@@ -73,36 +76,110 @@
             </div>
         </div>
 
+        <div class="card">
+            <h2>Support me</h2>
+            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+            <script
+                type='text/javascript'>kofiwidget2.init('Support me on Ko-fi', '#410882', 'K3P42A534K'); kofiwidget2.draw();</script>
+            <div style="margin-top: 12px">
+                <p class="sub">If you like my work, consider supporting me on Ko-fi. It helps me keep making cheats
+                    and patches for PS5 games.</p>
+            </div>
+        </div>
+
         <footer>Community patch, not affiliated with Koei Tecmo. Use at your own risk.</footer>
     </main>
 
     <script>
-        const FILENAME = "PPSA32802_01.003.004.json";
-        const CHEAT = {
-            name: "Fatal Frame II: Crimson Butterfly REMAKE",
-            id: "PPSA32802",
-            version: "01.003.004",
-            process: "eboot.bin",
-            mods: [{
-                name: "60fps (experimental)",
-                type: "checkbox",
-                hint: "60fps - untested, v01.003.004 only",
-                memory: [
-                    { offset: "088A24E0", on: "3C000000", off: "1E000000" },
-                    { offset: "088A24E4", on: "3C000000", off: "1E000000" },
-                    { offset: "088A24E8", on: "3C000000", off: "1E000000" },
-                    { offset: "088A24EC", on: "3C000000", off: "1E000000" },
-                    { offset: "088A24F0", on: "8988883C", off: "8988083D" },
-                    { offset: "088A24F4", on: "8988883C", off: "8988083D" }
-                ]
-            }],
-            credits: ["NikoruDev"]
+        const TITLE_ID = "PPSA32802";
+
+        // Newest first. Add a new game version here and it shows up in the dropdown.
+        const VERSIONS = {
+            "01.003.004": {
+                note: "Tested on a base PS5.",
+                cheat: {
+                    name: "Fatal Frame II: Crimson Butterfly REMAKE",
+                    id: TITLE_ID,
+                    version: "01.003.004",
+                    process: "eboot.bin",
+                    mods: [{
+                        name: "60fps (experimental)",
+                        type: "checkbox",
+                        hint: "60fps - untested, v01.003.004 only",
+                        memory: [
+                            { offset: "088A24E0", on: "3C000000", off: "1E000000" },
+                            { offset: "088A24E4", on: "3C000000", off: "1E000000" },
+                            { offset: "088A24E8", on: "3C000000", off: "1E000000" },
+                            { offset: "088A24EC", on: "3C000000", off: "1E000000" },
+                            { offset: "088A24F0", on: "8988883C", off: "8988083D" },
+                            { offset: "088A24F4", on: "8988883C", off: "8988083D" }
+                        ]
+                    }],
+                    credits: ["NikoruDev"]
+                }
+            },
+            "01.002.002": {
+                note: "Ported by Nisa",
+                cheat: {
+                    name: "Fatal Frame II: Crimson Butterfly REMAKE",
+                    id: TITLE_ID,
+                    version: "01.002.002",
+                    process: "eboot.bin",
+                    mods: [{
+                        name: "60fps (experimental)",
+                        type: "checkbox",
+                        hint: "60fps - untested, ported to v01.002.002",
+                        memory: [
+                            { offset: "0889E450", on: "3C000000", off: "1E000000" },
+                            { offset: "0889E454", on: "3C000000", off: "1E000000" },
+                            { offset: "0889E458", on: "3C000000", off: "1E000000" },
+                            { offset: "0889E45C", on: "3C000000", off: "1E000000" },
+                            { offset: "0889E460", on: "8988883C", off: "8988083D" },
+                            { offset: "0889E464", on: "8988883C", off: "8988083D" }
+                        ]
+                    }],
+                    credits: ["NikoruDev, ported to v01.002.002 by Nisa"]
+                }
+            }
         };
-        const TEXT = JSON.stringify(CHEAT, null, 2) + "\n";
+
+        const ORDER = Object.keys(VERSIONS);
         const $ = id => document.getElementById(id);
         const say = m => { $("status").textContent = m; };
-        $("src").textContent = TEXT;
+        let FILENAME = "", TEXT = "";
 
+        // Fill the dropdown
+        const sel = $("ver");
+        ORDER.forEach((v, i) => {
+            const o = document.createElement("option");
+            o.value = v;
+            o.textContent = v + (i === 0 ? "" : "");
+            sel.appendChild(o);
+        });
+
+        function render(v) {
+            const { cheat, note } = VERSIONS[v];
+            FILENAME = TITLE_ID + "_" + v + ".json";
+            TEXT = JSON.stringify(cheat, null, 2) + "\n";
+            $("src").textContent = TEXT;
+            $("fname").textContent = FILENAME;
+            $("gver").textContent = v;
+            $("howver").textContent = v;
+            $("note").textContent = note;
+            $("dl").href = "./" + FILENAME;
+            $("dl").setAttribute("download", FILENAME);
+            sel.value = v;
+            say("");
+        }
+
+        // Start on the version in the link (e.g. page.html#01.002.002), else the latest
+        const fromHash = decodeURIComponent(location.hash.slice(1));
+        render(ORDER.includes(fromHash) ? fromHash : ORDER[0]);
+
+        sel.addEventListener("change", () => {
+            render(sel.value);
+            history.replaceState(null, "", "#" + sel.value);
+        });
 
         $("copy").addEventListener("click", async () => {
             try { await navigator.clipboard.writeText(TEXT); say("Copied. Paste it into a file named " + FILENAME); }
